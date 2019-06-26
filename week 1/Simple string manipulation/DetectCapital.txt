@@ -1,0 +1,20 @@
+
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        if(word.length()==0)
+            return true;
+        boolean allcaps=true;
+        boolean allsmall=true;
+        boolean firstCaps=true;
+        for(int i=0;i<word.length();++i){
+            allcaps=allcaps&&Character.isUpperCase(word.charAt(i));
+            allsmall=allsmall&&Character.isLowerCase(word.charAt(i));
+            if(i==0){
+                firstCaps=firstCaps&&Character.isUpperCase(word.charAt(i));
+            }else{
+                firstCaps=firstCaps&&Character.isLowerCase(word.charAt(i));
+            }
+        }
+        return allcaps||allsmall||firstCaps;
+    }
+}
