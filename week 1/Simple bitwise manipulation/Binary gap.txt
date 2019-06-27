@@ -1,0 +1,23 @@
+class Solution {
+    public int binaryGap(int N) {
+        int ans=0;
+        int currAns=0;
+        boolean flag=false;
+        while(N!=0){
+            int lastBit=N&1;
+            if(lastBit==1&&flag){
+                currAns++;
+                if(currAns>ans){
+                    ans=currAns;
+                }
+                currAns=0;
+            }else if(lastBit==1){
+                flag=true;
+            }else if(flag){
+                currAns++;
+            }
+            N=N>>1;
+        }
+        return ans;
+    }
+}
