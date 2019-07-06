@@ -1,0 +1,31 @@
+class Solution {
+    public String[] uncommonFromSentences(String A, String B) {
+        HashSet<String> set=new HashSet<>();
+        HashSet<String> set2=new HashSet<>();
+        String[] first=A.split(" ");
+        String[] second=B.split(" ");
+        for(int i=0;i<first.length;++i){
+            if(!set.contains(first[i])&&!set2.contains(first[i]))
+                set.add(first[i]);
+            else{
+                set2.add(first[i]);
+                set.remove(first[i]);
+            }
+        }
+        for(int i=0;i<second.length;++i){
+            if(!set.contains(second[i])&&!set2.contains(second[i]))
+                set.add(second[i]);
+            else{
+                set2.add(second[i]);
+                set.remove(second[i]);
+            }
+        }
+        String[] ans=new String[set.size()];
+        int i=0;
+        for(String str:set){
+            ans[i]=str;
+            i++;
+        }
+        return ans;
+    }
+}
