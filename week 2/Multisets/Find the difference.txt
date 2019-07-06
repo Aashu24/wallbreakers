@@ -1,0 +1,23 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        HashMap<Character,Integer> set=new HashMap<>();
+        for(char ch:s.toCharArray()){
+            if(!set.containsKey(ch)){
+                set.put(ch,1);
+            }else{
+                set.put(ch,set.get(ch)+1);
+            }
+        }
+        for(char ch:t.toCharArray()){
+            if(!set.containsKey(ch))
+                return ch;
+            int cnt=set.get(ch);
+            if(cnt==1){
+                set.remove(ch);
+            }else{
+                set.put(ch,cnt-1);
+            }
+        }
+        return ' ';
+    }
+}
