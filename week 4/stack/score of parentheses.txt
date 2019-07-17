@@ -1,0 +1,15 @@
+class Solution {
+    public int scoreOfParentheses(String S) {
+        int cur=0;
+        Stack<Integer> st=new Stack<>();
+        for(int c:S.toCharArray()){
+            if(c=='('){
+                st.push(cur);
+                cur=0;
+            }else{
+                cur=st.pop()+Math.max(cur*2,1);
+            }
+        }
+        return cur;
+    }
+}
