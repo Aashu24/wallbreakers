@@ -1,0 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        ArrayList<Integer> list1=findLeafSeq(root1);
+        ArrayList<Integer> list2=findLeafSeq(root2);
+        if(list1.size()!=list2.size())
+            return false;
+        for(int i=0;i<list1.size();++i){
+            if(list1.get(i)!=list2.get(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+    private ArrayList<Integer> findLeafSeq(TreeNode root){
+        if(root==null){
+            ArrayList<Integer> base=new ArrayList<>();
+            return base;
+        }
+        ArrayList<Integer> myRes=new ArrayList<>();
+        ArrayList<TreeNode> queue=new ArrayList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            TreeNode node=queue.remove(queue.size()-1);
+            if(node.left==null&&node.right==null){
+                myRes.add(node.val);
+            }
+            if(node.right!=null)
+                queue.add(node.right);
+            if(node.left!=null)
+                queue.add(node.left);
+        }
+        return myRes;
+    }
+}
