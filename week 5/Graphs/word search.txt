@@ -1,0 +1,38 @@
+class Solution {
+    boolean[][] visited;
+    int[] row={-1,0,1,0};
+    int[] col={0,1,0,-1}; 
+    public boolean exist(char[][] board, String word) {
+        if(word==null||word.length()==0)
+            return true;
+        char ch=word.charAt(0);
+        visited=new boolean[board.length][board[0].length];
+        for(int j=0;j<board.length;++j){
+            for(int k=0;k<board[0].length;++k){
+                if(board[j][k]==ch){
+                    visited[j][k]=true;
+                    if(searchFrom(word,j,k,board,1))
+                        return true;
+                    visited[j][k]=false;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean searchFrom(String word,int i,int j,char[][] board,int idx){
+        if(idx==word.length())
+            return true;
+        for(int k=0;k<4;++k){
+            int x=i+row[k];
+            int y=j+col[k];
+            if(x<0||y<0||x>=board.length||y>=board[0].length||visited[x]               [y]||word.charAt(idx)!=board[x][y]){
+                continue;                
+            }
+            visited[x][y]=true;
+            if(searchFrom(word,x,y,board,idx+1))
+                return true;
+            visited[x][y]=false;
+        }
+        return false;
+    }
+}
